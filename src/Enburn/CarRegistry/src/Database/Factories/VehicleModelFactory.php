@@ -2,7 +2,7 @@
 
 namespace Enburn\CarRegistry\Database\Factories;
 
-use App\Models\VehicleModel;
+use Enburn\CarRegistry\Models\VehicleModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VehicleModelFactory extends Factory
