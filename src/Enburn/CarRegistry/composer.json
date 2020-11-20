@@ -1,0 +1,20 @@
+{
+  "name": "enburn/carregistry",
+  "minimum-stability" : "stable",
+  "type": "project",
+  "version": "dev-master",
+  "autoload": {
+    "psr-4": {
+      "Enburn\\CarRegistry\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Enburn\\CarRegistry\\Providers\\CarRegistryProvider"
+      ]
+    }
+  },
+  "require": {
+  }
+}
