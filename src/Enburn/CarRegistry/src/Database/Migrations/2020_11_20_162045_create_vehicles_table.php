@@ -18,9 +18,9 @@ class CreateVehiclesTable extends Migration
             $table->string('plate_number');
             $table->string('model');
             $table->date('year');
-            $table->int('mileage');
+            $table->integer('mileage');
             $table->date('registered_at');
-            $table->bool('veteran_status');
+            $table->boolean('veteran_status');
             $table->timestamps();
             $table->softDeletes();
         });

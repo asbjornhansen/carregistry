@@ -20,6 +20,7 @@ class CreateVehicleModelsTable extends Migration
             $table->integer('number_of_seats');
             $table->enum('fuel_types', app(FuelTypesConfigration::class)->typesOfFuel);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
