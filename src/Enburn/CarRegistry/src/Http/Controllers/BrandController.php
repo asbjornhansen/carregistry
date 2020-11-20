@@ -35,7 +35,7 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
-        $brand->softDelete();
+        $brand->delete();
 
         return response();
     }

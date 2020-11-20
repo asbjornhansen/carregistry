@@ -35,7 +35,7 @@ class VehicleModelController extends Controller
 
     public function destroy(VehicleModel $vehicleModel)
     {
-        $vehicleModel->softDelete();
+        $vehicleModel->delete();
 
         return response();
     }
