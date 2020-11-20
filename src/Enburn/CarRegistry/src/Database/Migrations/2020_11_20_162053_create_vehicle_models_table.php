@@ -1,5 +1,6 @@
 <?php
 
+use Enburn\CarRegistry\Configurations\FuelTypesConfigration;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,9 @@ class CreateVehicleModelsTable extends Migration
     {
         Schema::create('vehicle_models', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('number_of_seats');
+            $table->enum('fuel_types', app(FuelTypesConfigration::class)->typesOfFuel);
             $table->timestamps();
         });
     }
