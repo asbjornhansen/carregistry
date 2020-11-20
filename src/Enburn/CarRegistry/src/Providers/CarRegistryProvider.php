@@ -14,6 +14,7 @@ class CarRegistryProvider extends ServiceProvider
     public function register()
     {
         $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
