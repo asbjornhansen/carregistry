@@ -2,7 +2,8 @@
 
 namespace Enburn\CarRegistry\Http\Controllers;
 
-use App\Models\VehicleModel;
+use App\Http\Controllers\Controller;
+use Enburn\CarRegistry\Models\VehicleModel;
 use Illuminate\Http\Request;
 
 class VehicleModelController extends Controller
@@ -41,7 +42,7 @@ class VehicleModelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\VehicleModel  $vehicleModel
+     * @param  \Enburn\CarRegistry\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
     public function show(VehicleModel $vehicleModel)
@@ -52,7 +53,7 @@ class VehicleModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\VehicleModel  $vehicleModel
+     * @param  \Enburn\CarRegistry\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
     public function edit(VehicleModel $vehicleModel)
@@ -64,7 +65,7 @@ class VehicleModelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\VehicleModel  $vehicleModel
+     * @param  \Enburn\CarRegistry\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, VehicleModel $vehicleModel)
@@ -75,7 +76,7 @@ class VehicleModelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\VehicleModel  $vehicleModel
+     * @param  \Enburn\CarRegistry\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
     public function destroy(VehicleModel $vehicleModel)
