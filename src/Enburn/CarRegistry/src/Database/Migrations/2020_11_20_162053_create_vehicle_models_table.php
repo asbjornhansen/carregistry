@@ -16,6 +16,7 @@ class CreateVehicleModelsTable extends Migration
     {
         Schema::create('vehicle_models', function (Blueprint $table) {
             $table->id();
+            $table->integer('brand_id');
             $table->string('name');
             $table->integer('number_of_seats');
             $table->enum('fuel_types', app(FuelTypesConfigration::class)->typesOfFuel);
