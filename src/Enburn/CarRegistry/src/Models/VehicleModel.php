@@ -10,4 +10,9 @@ class VehicleModel extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function brand()
+    {
+        return $this->belongsToMany(Brand::class, 'vehicle_id', 'id');
+    }
 }

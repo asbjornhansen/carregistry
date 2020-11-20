@@ -10,4 +10,9 @@ class Vehicle extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function brand()
+    {
+        return $this->hasOne(Brand::class);
+    }
 }
