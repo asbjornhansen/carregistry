@@ -5,82 +5,38 @@ namespace Enburn\CarRegistry\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Enburn\CarRegistry\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return response()->json(Vehicle::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $store = Vehicle::updateOrCreate($request->all());
+
+        return response()->json($store, Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Enburn\CarRegistry\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function show(Vehicle $vehicle)
     {
-        //
+        return response()->json($vehicle);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Enburn\CarRegistry\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Vehicle $vehicle)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Enburn\CarRegistry\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $update = $vehicle->update($request->all());
+
+        return response()->json($update, Response::HTTP_CREATED);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Enburn\CarRegistry\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->softDelete();
+
+        return response();
     }
 }

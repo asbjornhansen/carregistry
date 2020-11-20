@@ -3,84 +3,40 @@
 namespace Enburn\CarRegistry\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Enburn\CarRegistry\Http\Requests\BrandRequest;
 use Enburn\CarRegistry\Models\Brand;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return response()->json(Brand::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(BrandRequest $request)
     {
-        //
+        $store = Brand::updateOrCreate($request->all());
+
+        return response()->json($store, Response::HTTP_CREATED);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Enburn\CarRegistry\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
     public function show(Brand $brand)
     {
-        //
+        return response()->json($brand);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Enburn\CarRegistry\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Brand $brand)
+    public function update(BrandRequest $request, Brand $brand)
     {
-        //
+        $update = $brand->update($request->all());
+
+        return response()->json($update, Response::HTTP_CREATED);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Enburn\CarRegistry\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Enburn\CarRegistry\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->softDelete();
+
+        return response();
     }
 }
