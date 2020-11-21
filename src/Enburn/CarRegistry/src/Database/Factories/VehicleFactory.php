@@ -27,7 +27,7 @@ class VehicleFactory extends Factory
 
         return [
             'plate_number' => $this->faker->lexify('??') . $this->faker->randomNumber(5),
-            'model' => 'S-max TDI 2.0 2006-2010',
+            'model' => implode(' ', $this->faker->words),
             'year' => $manufactoryDate,
             'mileage' => $this->faker->randomNumber(6),
             'registered_at' => $manufactoryDate->addDays($this->faker->randomDigit(365)),
