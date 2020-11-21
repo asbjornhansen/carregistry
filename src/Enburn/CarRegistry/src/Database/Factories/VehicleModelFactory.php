@@ -2,6 +2,7 @@
 
 namespace Enburn\CarRegistry\Database\Factories;
 
+use Enburn\CarRegistry\Configurations\FuelTypesConfigration;
 use Enburn\CarRegistry\Models\VehicleModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,9 @@ class VehicleModelFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'S-max TDI 2.0 2006-2010',
+            'number_of_seats' => $this->faker->randomElement([2,5]),
+            'fuel_type' => $this->faker->randomElement(app(FuelTypesConfigration::class)->typesOfFuel),
         ];
     }
 }
