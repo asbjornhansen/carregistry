@@ -14,7 +14,7 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'plate_number' => 'required|regex:/^[a-zA-Z]{2}\d*5$/',
+            'plate_number' => 'required|regex:/[a-zA-Z]{2}\d{5}/',
             'model' => 'required|string',
             'year' => 'required|date',
             'mileage' => 'required|numeric',
