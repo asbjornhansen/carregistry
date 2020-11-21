@@ -14,6 +14,7 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'sometimes|exists:brands',
             'name' => 'required|string',
         ];
     }
