@@ -20,6 +20,6 @@ class VehicleModel extends Model
 
     public function brand()
     {
-        return $this->belongsToMany(Brand::class, 'vehicle_id', 'id');
+        return $this->hasOne(Brand::class, 'vehicle_id', 'id');
     }
 }
