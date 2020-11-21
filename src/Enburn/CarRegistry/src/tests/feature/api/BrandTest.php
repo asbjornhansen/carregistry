@@ -2,6 +2,7 @@
 
 use Enburn\CarRegistry\Database\Factories\BrandFactory;
 use Enburn\CarRegistry\Models\Brand;
+use Faker\Factory;
 use Tests\TestCase;
 
 class BrandTest extends TestCase
@@ -24,9 +25,10 @@ class BrandTest extends TestCase
 
     public function testCanSeeBrands()
     {
-        Brand::create($this->brands->first()->toArray());
+        Brand::firstOrCreate($this->brands->first()->toArray());
 
         $response = $this->get('api/v1/brands');
+
         $response->assertStatus(200);
         $response->assertJsonFragment($this->brands->first()->toArray());
     }
@@ -34,8 +36,8 @@ class BrandTest extends TestCase
     public function testCanUpdateBrands()
     {
         $brand = $this->brands->first();
-        $createdBrand = Brand::create($brand->toArray());
-        $createdBrand->name = 'Ford';
+        $createdBrand = Brand::updateOrCreate($brand->toArray());
+        $createdBrand->name = (Factory::create())->lastName;
         $createdBrand->deleted_at = null;
 
         $response = $this->json('PATCH', 'api/v1/brands/' . $createdBrand->id, $createdBrand->toArray());
@@ -47,7 +49,7 @@ class BrandTest extends TestCase
     public function testCanDeleteBrand()
     {
         $brand = $this->brands->first();
-        $createdBrand = Brand::create($brand->toArray());
+        $createdBrand = Brand::firstOrCreate($brand->toArray());
 
         $response = $this->json('DELETE', 'api/v1/brands/' . $createdBrand->id);
 

@@ -15,6 +15,7 @@ class VehicleModel extends Model
         'name',
         'number_of_seats',
         'fuel_type',
+        'brand_id',
     ];
 
     public function brand()

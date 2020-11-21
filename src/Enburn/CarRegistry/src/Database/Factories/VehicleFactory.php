@@ -3,6 +3,7 @@
 namespace Enburn\CarRegistry\Database\Factories;
 
 use Carbon\Carbon;
+use Enburn\CarRegistry\Models\Brand;
 use Enburn\CarRegistry\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,6 +32,7 @@ class VehicleFactory extends Factory
             'mileage' => $this->faker->randomNumber(6),
             'registered_at' => $manufactoryDate->addDays($this->faker->randomDigit(365)),
             'veteran_status' => (int) $manufactoryDate->age >= 30,
+            'brand_id' => Brand::all()->isEmpty() ? BrandFactory::new()->create()->id : $this->faker->randomElement(Brand::all())->id,
         ];
     }
 }

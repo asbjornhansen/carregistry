@@ -25,7 +25,7 @@ class VehicleModelTest extends TestCase
 
     public function testCanSeeVehicleModels()
     {
-        VehicleModel::create($this->vehicleModels->first()->toArray());
+        VehicleModel::firstOrCreate($this->vehicleModels->first()->toArray());
 
         $response = $this->get('api/v1/models');
         $response->assertStatus(200);
@@ -35,7 +35,7 @@ class VehicleModelTest extends TestCase
     public function testCanUpdateVehicleModels()
     {
         $vehicleModel = $this->vehicleModels->first();
-        $createdVehicleModel = VehicleModel::create($vehicleModel->toArray());
+        $createdVehicleModel = VehicleModel::firstOrCreate($vehicleModel->toArray());
         $createdVehicleModel->name = 'Model 3';
 
 
@@ -50,7 +50,7 @@ class VehicleModelTest extends TestCase
     public function testCanDeleteBrand()
     {
         $vehicleModel = $this->vehicleModels->first();
-        $createdVehicleModel = VehicleModel::create($vehicleModel->toArray());
+        $createdVehicleModel = VehicleModel::firstOrCreate($vehicleModel->toArray());
 
         $response = $this->json('DELETE', 'api/v1/models/' . $createdVehicleModel->id);
 
