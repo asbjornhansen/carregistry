@@ -11,6 +11,12 @@ class VehicleModel extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'number_of_seats',
+        'fuel_type',
+    ];
+
     public function brand()
     {
         return $this->belongsToMany(Brand::class, 'vehicle_id', 'id');

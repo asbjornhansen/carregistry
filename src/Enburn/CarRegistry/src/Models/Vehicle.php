@@ -11,6 +11,8 @@ class Vehicle extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function brand()
     {
         return $this->hasOne(Brand::class);

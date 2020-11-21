@@ -11,13 +11,17 @@ class Brand extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function vehicles()
     {
-        return $this->belongsTo(Vehicle::class);
+        return $this->hasMany(Vehicle::class, 'brand_id');
     }
 
     public function vehicleModels()
     {
-        return $this->hasMany(VehicleModel::class, 'vehicle_id', 'id');
+        return $this->hasMany(VehicleModel::class, 'vehicle_id');
     }
 }
