@@ -3,8 +3,10 @@
 namespace Enburn\CarRegistry\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Enburn\CarRegistry\Http\Requests\VehicleModelRequest;
 use Enburn\CarRegistry\Http\Requests\VehicleRequest;
 use Enburn\CarRegistry\Models\VehicleModel;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class VehicleModelController extends Controller
@@ -14,7 +16,7 @@ class VehicleModelController extends Controller
         return response()->json(VehicleModel::all());
     }
 
-    public function store(VehicleRequest $request)
+    public function store(VehicleModelRequest $request)
     {
         $store = VehicleModel::updateOrCreate($request->all());
 
@@ -26,17 +28,18 @@ class VehicleModelController extends Controller
         return response()->json($vehicleModel);
     }
 
-    public function update(VehicleRequest $request, VehicleModel $vehicleModel)
+    public function update(VehicleModelRequest $request)
     {
-        $update = $vehicleModel->update($request->all());
+        $vehicleModel = VehicleModel::find($request->id);
+        $vehicleModel->update($request->all());
 
-        return response()->json($update, Response::HTTP_CREATED);
+        return response()->json($vehicleModel->fresh(), Response::HTTP_CREATED);
     }
 
-    public function destroy(VehicleModel $vehicleModel)
+    public function destroy(VehicleModel $model)
     {
-        $vehicleModel->delete();
+        $model->delete();
 
-        return response();
+        return response()->json();
     }
 }

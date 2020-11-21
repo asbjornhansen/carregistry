@@ -28,15 +28,15 @@ class BrandController extends Controller
 
     public function update(BrandRequest $request, Brand $brand)
     {
-        $update = $brand->update($request->all());
+        $brand->update($request->all());
 
-        return response()->json($update, Response::HTTP_CREATED);
+        return response()->json($brand->fresh(), Response::HTTP_CREATED);
     }
 
     public function destroy(Brand $brand)
     {
         $brand->delete();
 
-        return response();
+        return response()->json();
     }
 }
