@@ -16,10 +16,10 @@ class CreateVehicleModelsTable extends Migration
     {
         Schema::create('vehicle_models', function (Blueprint $table) {
             $table->id();
-            $table->integer('brand_id');
+            $table->integer('brand_id')->nullable();
             $table->string('name');
             $table->integer('number_of_seats');
-            $table->enum('fuel_types', app(FuelTypesConfigration::class)->typesOfFuel);
+            $table->enum('fuel_type', app(FuelTypesConfigration::class)->typesOfFuel);
             $table->timestamps();
             $table->softDeletes();
         });
