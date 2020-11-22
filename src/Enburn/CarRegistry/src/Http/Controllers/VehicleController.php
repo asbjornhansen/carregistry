@@ -12,12 +12,12 @@ class VehicleController extends Controller
 {
     public function index()
     {
-        return response()->json(Vehicle::all());
+        return response()->json(Vehicle::with('brand.vehicleModels')->get());
     }
 
     public function store(Request $request)
     {
-        $store = Vehicle::updateOrCreate($request->all());
+        $store = Vehicle::updateOrCreate(['id' => $request->get('id')], $request->all());
 
         return response()->json($store, Response::HTTP_CREATED);
     }
