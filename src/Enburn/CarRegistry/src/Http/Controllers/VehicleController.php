@@ -15,7 +15,7 @@ class VehicleController extends Controller
         return response()->json(Vehicle::with('brand.vehicleModels')->get());
     }
 
-    public function store(Request $request)
+    public function store(VehicleRequest $request)
     {
         $store = Vehicle::updateOrCreate(['id' => $request->get('id')], $request->all());
 
