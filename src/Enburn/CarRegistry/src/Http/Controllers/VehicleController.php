@@ -10,9 +10,19 @@ use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Vehicle::with('brand.vehicleModels')->get());
+        $vehicles = Vehicle::with('brand.vehicleModels');
+
+        if (!empty($request->get('filterBrandName'))) {
+            $vehicles->filterBrandName($request->get('filterBrandName'));
+        }
+
+        if (!empty($request->get('filterModelName'))) {
+            $vehicles->filterModelName($request->get('filterModelName'));
+        }
+
+        return response()->json($vehicles->get());
     }
 
     public function store(VehicleRequest $request)

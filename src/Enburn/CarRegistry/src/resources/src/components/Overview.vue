@@ -5,31 +5,35 @@
                 <p v-on:click="toggleForm" class="button is-success has-text-weight-bold"> <span class="mdi mdi-plus-circle"></span>/<span class="mdi mdi-pencil"></span> New or edit vehicle</p>
             </div>
             <div v-if="this.showForm">
-                <label>
+                <label class="label">
                     Brand
-                    <select v-model="newBrandId">
-                        <option v-for="brand in this.brands" :value="brand.id">{{ brand.name }}</option>
-                    </select>
+                    <div class="select">
+                        <select class="select" v-model="newBrand">
+                            <option v-for="brand in this.brands" :value="brand">{{ brand.name }}</option>
+                        </select>
+                    </div>
                 </label>
-                <label>
+                <label class="label">
                     Plate number
                     <input class="input" type="text" v-model="newPlateNumber">
                 </label>
-                <label>
+                <label class="label" v-if="this.newBrand !== null">
                     Model
-                    <select v-model="newModel">
-                        <option v-for="model in this.models" :value="model.id">{{ model.name }}</option>
-                    </select>
+                    <div class="select">
+                        <select v-model="newModel">
+                            <option v-for="model in this.newBrand.vehicle_models" :value="model.name">{{ model.name }}</option>
+                        </select>
+                    </div>
                 </label>
-                <label>
+                <label class="label">
                     Year
                     <input class="input" type="date" v-model="newYear">
                 </label>
-                <label>
+                <label class="label">
                     Mileage
                     <input class="input" type="number" v-model="NewMileage">
                 </label>
-                <label>
+                <label class="label">
                     Date registered
                     <input class="input" type="date" v-model="newRegisteredAt">
                 </label>
@@ -37,6 +41,17 @@
             </div>
         </div>
 
+        <hr>
+        <p>Filters</p>
+        <label class="label">
+            Brand name
+            <input class="input" v-model="filterBrandName" type="text">
+        </label>
+        <label class="label">
+            Model name
+            <input class="input" v-model="filterModelName" type="text">
+        </label>
+        <a v-on:click="getVehicles" class="button is-info">Set filters</a>
         <hr>
 
         <table class="table">
@@ -79,14 +94,19 @@ export default {
             vehicles: null,
             brands: null,
             models: [],
+            availableModels: null,
+
+            filterBrandName: '',
+            filterModelName: '',
 
             vehicleId: null,
-            newBrandId: null,
+            newBrand: null,
             newPlateNumber: null,
             newModel: null,
             newYear: null,
             NewMileage: null,
             newRegisteredAt: null,
+
             showForm: false,
         }
     },
@@ -107,6 +127,7 @@ export default {
 
             this.vehicleId = vehicle.id;
             this.newPlateNumber = vehicle.plate_number;
+            this.newBrand = vehicle.brand;
             this.newModel = vehicle.model;
             this.newYear = vehicle.year;
             this.NewMileage = vehicle.mileage;
@@ -126,7 +147,7 @@ export default {
         newVehicle() {
             const data = {
                 'id': this.vehicleId,
-                'brand_id': this.newBrandId,
+                'brand_id': this.newBrand.id,
                 'plate_number': this.newPlateNumber,
                 'model': this.newModel,
                 'year': this.newYear,
@@ -151,7 +172,7 @@ export default {
             this.showForm = !this.showForm;
         },
         getVehicles() {
-            axios.get('api/v1/vehicles')
+            axios.get('api/v1/vehicles?filterBrandName=' + this.filterBrandName + '&filterModelName=' + this.filterModelName)
                 .then(response => {
                     this.vehicles = response.data
 
