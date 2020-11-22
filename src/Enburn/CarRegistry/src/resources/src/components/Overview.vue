@@ -38,6 +38,7 @@
                     <input class="input" type="date" v-model="newRegisteredAt">
                 </label>
                 <button v-on:click="newVehicle" class="button is-success">Save vehicle</button>
+                <button v-on:click="clear" v-if="this.vehicleId" class="button is-danger">Stop editing {{ this.newPlateNumber}}</button>
             </div>
         </div>
 
@@ -197,7 +198,16 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
-        }
+        },
+        clear() {
+            this.vehicleId = null;
+            this.newPlateNumber = null;
+            this.newBrand = null;
+            this.newModel = null;
+            this.newYear = null;
+            this.NewMileage = null;
+            this.newRegisteredAt = null;
+        },
     },
     mounted () {
         this.getVehicles();
