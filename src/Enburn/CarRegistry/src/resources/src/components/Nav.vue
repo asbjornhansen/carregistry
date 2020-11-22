@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <buttons>
+        <div class="buttons">
             <button class="button ">
                 <router-link to="/">Overview</router-link>
             </button>
@@ -8,7 +8,7 @@
             <button class="button ">
                 <router-link to="/brands">Brands</router-link>
             </button>
-        </buttons>
+        </div>
     </nav>
 </template>
 

@@ -16,7 +16,7 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-        $store = Brand::updateOrCreate($request->all());
+        $store = Brand::updateOrCreate(['id' => $request->get('id')], $request->all());
 
         return response()->json($store, Response::HTTP_CREATED);
     }
